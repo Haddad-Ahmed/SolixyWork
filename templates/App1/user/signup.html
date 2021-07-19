@@ -1,0 +1,20 @@
+{% extends 'Accueil.html' %}
+{% block content %}
+
+
+<form method="post">{% csrf_token %}
+    <label>Username</label>{{ f.username }}
+    <label>Password1</label>{{ f.password1 }}
+    <label>Password2</label>{{ f.password2 }}
+    {% if f.errors %}
+      {% for filde in f.fildes %}
+       {% for error in filed.errors %}
+           {{ error }}
+       {% endfor %}
+      {% endfor %}
+    {% endif %}
+    <input type="submit" value="Create">
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+{% for pp in c %}
+<ul>
+        <li> id : {{ pp.id }}</li>
+        <li> Nom  : {{ pp.nom }}</li>
+        <li> Type : {{ pp.type }}</li>
+        <li> <a href ="{% url 'id' pp.id %}"> Detail  </a> </li>
+</ul>
+    {% empty %} <h1> aucune collection dans la bd </h1>
+{% endfor %}
+</body>
+</html>

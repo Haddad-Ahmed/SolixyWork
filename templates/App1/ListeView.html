@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1><a href="{% url 'logout' %}">Logout</a></h1>
+<h1> Nbre total des Collections </h1>
+{%  if  Collections %}
+    {{ Collections | length }}
+{% endif %}
+<h1>Ajout Collection avec Form <a href="{% url 'add' %}">+</a></h1>
+<h1>Ajout Collection avec Generic View <a href="{% url 'Ajout' %}">+</a></h1>
+<h> Liste des Collections</h>
+<table>
+    <tr>
+        <th> Nom Collection</th>
+    </tr>
+    {% for foo in Collections %}
+    <tr>
+        <td><a href="{% url 'd' foo.id %}" > {{ foo.nom }}</a> </td>
+        <td> <a href="{% url 'update' foo.id %}"> Update </a> <a href="{% url '-update' foo.id %}"> Update2 </a> <a href="{% url 'delete' foo.id %}" > Delete </a>  <a href="{% url '-delete' foo.id %}" > Delete2 </a></td>
+    </tr>
+    {% endfor %}
+    </tr>
+</table>
+</body>
+</html>

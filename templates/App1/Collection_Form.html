@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    Type <select name="type">
+    <option name="AI">Album Images</option>
+    <option name="AV">Album Video</option>
+    <option name="S">Son</option>
+    </select>
+    <input type="text" name="nom" placeholder="Nom">
+    <input type="checkbox" name="public" checked>Public
+    {{ form.as_p }}
+    <br>
+    <input type="submit" value="Save">
+</form>
+</body>
+</html>

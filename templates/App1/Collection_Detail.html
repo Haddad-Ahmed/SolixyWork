@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <li> Nom collection : {{ p.nom_collection }}</li>
+    <li> membres {% for m in p.membres.all %} {{ m}} {% endfor %}</li>
+</ul>
+</body>
+</html>

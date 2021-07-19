@@ -1,0 +1,88 @@
+
+
+{% load static %}
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+<!-- Bootstrap Core JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+<script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $("#create-collection").modalForm({
+        formURL: "{% url 'create_collection' %}"
+    });
+
+});
+</script>
+{% block jquery %}<script src="{% static 'js/jquery.js' %}"></script>{% endblock %}
+{% block header %} {% include 'Header.html' %} {% endblock %}
+
+
+
+<div class="container-fluid">
+<div style="border: 1px solid rgb(204, 204, 204); margin-top: 20px;">
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+<div style="padding: 10px; border: 1px solid rgb(204, 204, 204);">
+    <div class="flex-item-auto-width flex-align-center flex-justify-start">
+    Filtrer par <select>
+    <option>Mots-Cles</option>
+    <option>Type</option>
+    <option>Autres</option>
+    </select>
+    <input type="text">
+    <button disabled type="button" class="btn btn-default">Filtrer</button>
+    <button disabled type="button" class="btn btn-default">Ajouter à la collection</button>
+    <button id="create-collection" class="btn btn-danger" type="button" name="button">
+        Créer une collection
+    </button>
+    </div>
+</div>
+        <div>
+            <div class="row" style="padding: 10px">
+                <!--Occupe 4 colonnes-->
+                <div class="col-4"><span style="font-weight: bold; font-size: 17px;"> Votre contenu </span>
+                   <table class="table">
+                   {% for pp in c %}
+                       <tbody>
+                       <tr>
+                              <td>{% if pp.type == "AI" %}
+                                Collections d’images : {{ pp.nom }} <a href="{% url 'update' pp.id %}"> Update </a> <a href="{% url 'delete' pp.id %}"> Delete </a> </td>
+                               <td>{% elif pp.type == "AV" %}
+                               Collections des videos : {{ pp.nom }} <a href="{% url 'update' pp.id %}"> Update </a> <a href="{% url 'delete' pp.id %}"> Delete </a></td>
+                               <td> {% elif pp.type == "S" %}
+                                Collections sons : {{ pp.nom }}<a href="{% url 'update' pp.id %}"> Update </a> <a href="{% url 'delete' pp.id %}"> Delete </a> </td>
+                           {% endif %}
+                       {% endfor %}
+                       </tr>
+                       </tbody>
+                   </table>
+                </div>
+                <!--Occupe 10 colonnes-->
+                <div class="col-8">Trier par
+                <select>
+                 <option>Mots-Cles</option>
+                 <option>Type</option>
+                 <option>Autres</option>
+                </select>
+                </div>
+            </div>
+        </div>
+<div>
+</div>
+</div>
+</div>
+</div>
+
+{% block content %} {% endblock %}
+{% block footer %} {% include 'Footer.html' %} {% endblock %}
+</body>
+</html>
