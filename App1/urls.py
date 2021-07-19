@@ -7,9 +7,12 @@ from App1.views import *
 
 urlpatterns = [
     path('',views.index),
-    path('id/<int:id>', views.Collection_id),
+    path('id/<int:pk>', views.Collection_id),
     path('add',views.add,name="add"),
     path('create/', views.CollectionCreateView.as_view(), name='create_collection'),
+    path('update/<int:pk>', views.CollectionUpdateView.as_view(), name='update_collection'),
+    path('read/<int:pk>', views.CollectionReadView.as_view(), name='read_collection'),
+    path('delete/<int:pk>', views.CollectionDeleteView.as_view(), name='delete_collection'),
     path('login/', views.login_user, name='login'),
     path('logout/', views.logout_user, name='logout'),
     path('signup/', views.signup, name='signup'),

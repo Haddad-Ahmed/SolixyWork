@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bootstrap_modal_forms',
     'django_filters',
     'App1.apps.App1Config',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

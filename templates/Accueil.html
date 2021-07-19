@@ -1,6 +1,6 @@
 
-
 {% load static %}
+{% load widget_tweaks %}
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
 <!-- Bootstrap Core JavaScript -->
@@ -12,10 +12,23 @@
 <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-
+    // Read Collection buttons
+    $(".read-collection").each(function () {
+        $(this).modalForm({formURL: $(this).data("form-url")});
+    });
+    // Update Collection
+    $(".update-collection").each(function () {
+        $(this).modalForm({formURL: $(this).data("form-url")});
+    });
+    // Delete Collection buttons - formURL is retrieved from the data of the element
+    $(".delete-collection").each(function () {
+        $(this).modalForm({formURL: $(this).data("form-url"), isDeleteForm: true});
+    });
+    // Create Collection buttons
     $("#create-collection").modalForm({
         formURL: "{% url 'create_collection' %}"
     });
+
 
 });
 </script>
@@ -55,11 +68,29 @@ $(document).ready(function() {
                        <tbody>
                        <tr>
                               <td>{% if pp.type == "AI" %}
-                                Collections d’images : {{ pp.nom }} <a href="{% url 'update' pp.id %}"> Update </a> <a href="{% url 'delete' pp.id %}"> Delete </a> </td>
+                                Collections d’images : {{ pp.nom }}
+                                <button type="button" class="update-collection bs-modal btn btn-sm btn-primary" data-form-url="{% url 'update_collection' pp.id %}">Update
+                                    <span class="fa fa-pencil"></span>
+                                </button>
+                                <button type="button" class="delete-collection bs-modal btn btn-sm btn-danger" data-form-url="{% url 'delete_collection' pp.id %}">
+                                    <span class="fa fa-trash"></span> Delete
+                                </button> </td>
                                <td>{% elif pp.type == "AV" %}
-                               Collections des videos : {{ pp.nom }} <a href="{% url 'update' pp.id %}"> Update </a> <a href="{% url 'delete' pp.id %}"> Delete </a></td>
+                               Collections des videos : {{ pp.nom }}
+                                <button type="button" class="update-collection bs-modal btn btn-sm btn-primary" data-form-url="{% url 'update_collection' pp.id %}">Update
+                                    <span class="fa fa-pencil"></span>
+                                </button>
+                                <button type="button" class="delete-collection bs-modal btn btn-sm btn-danger" data-form-url="{% url 'delete_collection' pp.id %}">
+                                    <span class="fa fa-trash"></span> Delete
+                                </button> </td>
                                <td> {% elif pp.type == "S" %}
-                                Collections sons : {{ pp.nom }}<a href="{% url 'update' pp.id %}"> Update </a> <a href="{% url 'delete' pp.id %}"> Delete </a> </td>
+                                Collections sons : {{ pp.nom }}
+                                <button type="button" class="update-collection bs-modal btn btn-sm btn-primary" data-form-url="{% url 'update_collection' pp.id %}">Update
+                                    <span class="fa fa-pencil"></span>
+                                </button>
+                                <button type="button" class="delete-collection bs-modal btn btn-sm btn-danger" data-form-url="{% url 'delete_collection' pp.id %}">
+                                    <span class="fa fa-trash"></span> Delete
+                                </button> </td>
                            {% endif %}
                        {% endfor %}
                        </tr>

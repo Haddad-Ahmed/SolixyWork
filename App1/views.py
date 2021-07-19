@@ -1,5 +1,5 @@
 import collection as collection
-from bootstrap_modal_forms.generic import BSModalCreateView
+from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView, BSModalReadView, BSModalDeleteView
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -54,8 +54,27 @@ class DetailCollection(DetailView):
 class CollectionCreateView(BSModalCreateView):
     template_name = 'App1/collection/create_collection.html'
     form_class = CollectionModelForm
-    success_message = 'Success: Book was created.'
-    success_url = reverse_lazy('index')
+    success_message = 'Success: Collection was created.'
+    success_url = reverse_lazy('List')
+
+class CollectionUpdateView(BSModalUpdateView):
+    model = Collection
+    template_name = 'App1/collection/update_collection.html'
+    form_class = CollectionModelForm
+    success_message = 'Success: Collection was updated.'
+    success_url = reverse_lazy('List')
+
+# Read
+class CollectionReadView(BSModalReadView):
+    model = Collection
+    template_name = 'App1/collection/read_collection.html'
+
+# Delete
+class CollectionDeleteView(BSModalDeleteView):
+    model = Collection
+    template_name = 'App1/collection/delete_collection.html'
+    success_message = 'Success: Collection was deleted.'
+    success_url = reverse_lazy('List')
 
 def collection_list(request):
     f = CollectionFilter(request.GET, queryset=Collection.objects.all())
