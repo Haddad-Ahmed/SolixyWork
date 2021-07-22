@@ -10,7 +10,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from django.urls import reverse, reverse_lazy
-from App1.forms import ADDCollectionForm, CollectionModelForm, CollectionFilter
+from App1.forms import ADDCollectionForm, CollectionModelForm, CollectionFilter, CollectionUModelForm
 from App1.models import Collection
 # Create your views here.
 
@@ -60,7 +60,7 @@ class CollectionCreateView(BSModalCreateView):
 class CollectionUpdateView(BSModalUpdateView):
     model = Collection
     template_name = 'App1/collection/update_collection.html'
-    form_class = CollectionModelForm
+    form_class = CollectionUModelForm
     success_message = 'Success: Collection was updated.'
     success_url = reverse_lazy('List')
 

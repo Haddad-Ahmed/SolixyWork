@@ -18,6 +18,12 @@ class CollectionModelForm(BSModalModelForm):
          fields = ('type','nom','public')
          widgets = {'besoins' : Textarea(attrs={'cols':20 , 'rows':20})}
 
+class CollectionUModelForm(BSModalModelForm):
+    class Meta:  # pr dire que je ne peux pas dupliquer la classe
+         model = Collection
+         fields = ('nom','public')
+         widgets = {'besoins' : Textarea(attrs={'cols':20 , 'rows':20})}
+
 class CollectionFilter(django_filters.FilterSet):
     class Meta:
         model = Collection
